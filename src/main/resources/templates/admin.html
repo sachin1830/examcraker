@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-layers.min.js"></script>
+<script src="js/init.js"></script>
+<noscript>
+	<link rel="stylesheet" href="css/skel.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/style-xlarge.css" />
+</noscript>
+</head>
+<body>
+
+	<!-- Header -->
+	<header id="header">
+		<h1>
+			<a href="index.html">ExamCraker</a>
+		</h1>
+		<nav id="nav">
+			<ul>
+				<li><a th:href="@{/}">Home</a></li>
+				<li><a th:href="@{/adminpanel}">Admin</a></li>
+				<li><a href="#">About</a></li>
+				<li><form action="#" th:action="@{/logout}" method="post">
+				<button type="submit" class="btn btn-danger">Logout</button>
+				</form>
+				
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Main -->
+	<section id="main" class="wrapper">
+		
+		<div class="container">
+
+			<header class="major">
+				<h2>Admin Panel</h2>
+				<hr>
+			</header>
+			<button type="button" class="btn btn-primary btn-lg"
+				data-toggle="modal" data-target="#exampleModalCenter">Add
+				Questions</button>
+
+			<!--------------- Modal------------------------------------------------------- -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title text-danger" id="exampleModalCenterTitle">Add
+								Questions</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="#" th:action="@{/addQuestion}"
+							th:object="${newquestion}" method="post">
+							<div class="modal-body">
+								<div class="form-group">
+									<label> question:</label> <input type="text"
+										class="form-control" placeholder="Enter question"
+										th:field="*{question}">
+								</div>
+
+								<div class="form-group">
+									<label>Which type question:</label> <select th:field="*{type}">
+										<option value="programming">programming</option>
+										<option value="aptitude">aptitude</option>
+										<option value="reasoning">reasoning</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label>option1:</label> <input type="text" class="form-control"
+										placeholder="Enter option1" th:field="*{option1}">
+								</div>
+								<div class="form-group">
+									<label>option2:</label> <input type="text" class="form-control"
+										placeholder="Enter option2" th:field="*{option2}">
+								</div>
+								<div class="form-group">
+									<label>option3:</label> <input type="text" class="form-control"
+										placeholder="Enter option3" th:field="*{option3}">
+								</div>
+								<div class="form-group">
+									<label>option4:</label> <input type="text" class="form-control"
+										placeholder="Enter option4" th:field="*{option4}">
+								</div>
+								<div class="form-group">
+									<label>Answer:</label> <input type="text" class="form-control"
+										placeholder="Enter answer" th:field="*{annswer}">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">add</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!---model end---------------------------------------------------------->
+
+			<!-- -----------------------showing data in the table----------------------- -->
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Question</th>
+						<th scope="col">type</th>
+						<th scope="col">option1</th>
+						<th scope="col">option2</th>
+						<th scope="col">option3</th>
+						<th scope="col">option3</th>
+						<th scope="col">Answer</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="questions : ${list_of_question}">
+						<td th:text="${questions.question}"></td>
+						<td th:text="${questions.type}"></td>
+						<td th:text="${questions.option1}"></td>
+						<td th:text="${questions.option2}"></td>
+						<td th:text="${questions.option3}"></td>
+						<td th:text="${questions.option4}"></td>
+						<td th:text="${questions.annswer}"></td>
+						<td><a class="btn btn-primary"
+							th:href="@{/updateQuestion/{id}(id=${questions.id})}">Update</a>
+							<a class="btn btn-danger"
+							th:href="@{/deleteQuestion/{id}(id=${questions.id})}">delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-------------------------end of the table--------------------------->
+
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="container">
+			<section class="links">
+				<div class="row">
+					<section class="3u 6u(medium) 12u$(small)">
+						<h3>Resourse</h3>
+						<ul class="unstyled">
+							<li><a href="#">Catalog</a></li>
+							<li><a href="#">ExamCrak Talk</a></li>
+							<li><a href="#">Student Success</a></li>
+							<li><a href="#">Scollarships</a></li>
+							<li><a href="#">Career tips</a></li>
+						</ul>
+					</section>
+					<section class="3u 6u$(medium) 12u$(small)">
+						<h3>Community</h3>
+						<ul class="unstyled">
+							<li><a href="#">Learners</a></li>
+							<li><a href="#">Developers</a></li>
+							<li><a href="#">Blog</a></li>
+							<li><a href="#">Tech Blog</a></li>
+							<li><a href="#">Beta Testers</a></li>
+						</ul>
+					</section>
+					<section class="3u 6u(medium) 12u$(small)">
+						<h3>Our partners</h3>
+						<ul class="unstyled">
+							<li><a href="#">educational partner</a></li>
+							<li><a href="#">Digital partner</a></li>
+							<li><a href="#">Resource Partner</a></li>
+							<li><a href="#">Universites partner</a></li>
+							<li><a href="#">Business Partner</a></li>
+						</ul>
+					</section>
+					<section class="3u$ 6u$(medium) 12u$(small)">
+						<h3>About Us</h3>
+						<ul class="unstyled">
+							<li><a href="#">contact us </a></li>
+							<li><a href="#">location: Patia Industrial
+									Area,BBSR,Odisha</a></li>
+							<li><a href="#">careeer</a></li>
+							<li><a href="#">help</a></li>
+							<li><a href="#">office branch:Bangalore,India</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+			<div class="row">
+				<div class="8u 12u$(medium)">
+					<ul class="copyright">
+						<li>&copy; All rights reserved.</li>
+						<li>All the information present in this website is not true
+							this is only i used for educational purpose of me , no other
+							intension.</li>
+					</ul>
+				</div>
+				<div class="4u$ 12u$(medium)">
+					<ul class="icons">
+						<li><a class="icon rounded fa-facebook" href="#"><span
+								class="label">Facebook</span></a></li>
+						<li><a class="icon rounded fa-twitter" href="#"><span
+								class="label">Facebook</span></a></li>
+						<li><a class="icon rounded fa-instagram" href="#"><span
+								class="label">instagram</span></a></li>
+						<li><a class="icon rounded fa-linkedin" href="#"><span
+								class="label">LinkedIn</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+</body>
+</html>
