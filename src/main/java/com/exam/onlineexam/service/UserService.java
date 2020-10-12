@@ -39,7 +39,7 @@ public class UserService
 	public void saveUser(RegisterUser user)
 	{
 		RegisterUser newuser=new RegisterUser(user.getId(),user.getFirst_name(),user.getLast_name(),user.getEmail()
-				                      ,passwordEncoder.encode(user.getPassword()),Arrays.asList(new Role(RoleAssign.ROLE_ADMIN.toString())));
+				                      ,passwordEncoder.encode(user.getPassword()),Arrays.asList(new Role(RoleAssign.ROLE_USER.toString())));
 		
 		userRepository.save(newuser);
 	}

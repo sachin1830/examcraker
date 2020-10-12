@@ -8,7 +8,7 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		<script src="js/jquery.min.js"></script>
 		<script src="js/skel.min.js"></script>
@@ -30,20 +30,28 @@
 						<li><a th:href="@{/}">Home</a></li>
 						<li><a th:href="@{/adminpanel}">Admin</a></li>
 						<li><a href="#">About</a></li>
-						<li><a href="#" class="button special" th:href="@{/registration}">Register</a></li>
+						
+					    <li  sec:authorize="!isAuthenticated()"><a href="#" class="button special" th:href="@{/registration}">Register</a></li>
+					    
+					    <li sec:authorize="isAuthenticated()"><a  class="button special" th:href="@{/logout}">Logout</a></li>
+					    
 					</ul>
 				</nav>
 			</header>
 
 		<!-- Banner -->
 			<section id="banner">
-				<h2>Crak it and make it..</h2>
-				<p>Failuer is not the opposite of success its part of success..</p>
+				<h2>crack it and make it..</h2>
+				<p>failure is not the opposite of success its part of success..</p>
+				<p class="text-white">hiii <span sec:authentication="principal.username"></span> all the best for your exam..</p>
+				
 				<ul class="actions">
-					<li>
+					<li sec:authorize="!isAuthenticated()">
 						<a href="#" class="button big" th:href="@{/login}">SignIn</a>
 					</li>
+					
 				</ul>
+			
 			</section>
 
 		<!-- One -->
@@ -51,7 +59,7 @@
 				<div class="container">
 					<header class="major">
 						<h2>Test Your Knowledge</h2>
-						<p>Lorem ipsum dolor sit amet, delectus consequatur, similique quia!</p>
+						
 					</header>
 					<div class="row 150%">
 						<div class="4u 12u$(medium)">

@@ -34,7 +34,7 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="admin.html">Register</a></li>
+						<li><a href="#" th:href="@{/login}">Login</a></li>
 						<li><a href="#">About</a></li>
 					</ul>
 				</nav>
@@ -49,25 +49,34 @@
                    
                    <h2 class="text-center">ExamCraker</h2>
                    <h3 class="text-center">Registration</h3>
+                   <div th:if="${param.success}" class="text-center">
+			          <div class="alert alert-info">
+				        you have successfully register go to login!!
+			          </div>
+				  </div>
+                   <!-- error message -->
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">something wrong please recheck all field!!</div>
+					</div>
                       <div class="form-group">
                            <label for="firstname">FirstName:</label>
-                           <input type="text" class="form-control" id="firstname" placeholder="Enter your FirstName" th:field="*{first_name}" >
+                           <input type="text" class="form-control" id="firstname" placeholder="Enter your FirstName" th:field="*{first_name}" required>
                        </div>
                        <div class="form-group ">
                              <label for="LastName">LastName:</label>
-                             <input type="text" class="form-control" id="LastName" placeholder="Enter your LastName" th:field="*{last_name}">
+                             <input type="text" class="form-control" id="LastName" placeholder="Enter your LastName" th:field="*{last_name}" required>
                        </div>
                     
 
                       <div class="form-group">
                        <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                        placeholder="Enter your Email" th:field="*{email}">
+                        placeholder="Enter your Email" th:field="*{email}" required>
                      </div>
 
                      <div class="form-group">
                        <label for="exampleInputPassword1">Password</label>
-                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password" th:field="*{password}">
+                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password" th:field="*{password}" required>
                        <small id="emailHelp" class="form-text text-muted">your password should strong</small>
                      </div>
    

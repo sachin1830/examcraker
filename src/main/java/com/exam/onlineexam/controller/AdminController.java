@@ -44,7 +44,6 @@ public class AdminController
 		Question question=adminService.getQuestionById(id);
 		
 		model.addAttribute("newquestion", question);
-		
 		return "update";
 		
 	}
