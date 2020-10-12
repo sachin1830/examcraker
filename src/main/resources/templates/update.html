@@ -39,6 +39,7 @@
 				<label> question:</label> <input type="text" class="form-control"
 					placeholder="Enter question" th:field="*{question}">
 			</div>
+			<input type="hidden" th:field="*{id}">
 			<div class="form-group">
 			<label>Which type question:</label>
     			<select th:field="*{type}">

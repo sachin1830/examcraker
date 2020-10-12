@@ -19,6 +19,7 @@ public class AdminService
 	public void addQuestion(Question question)
 	{
 		adminRepository.save(question);
+		
 	}
 	
 	public List<Question> getAllQuestions()
